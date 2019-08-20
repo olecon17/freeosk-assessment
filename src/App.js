@@ -20,9 +20,7 @@ function App() {
         setError(true);
       }
     });
-  }
 
-  async function fetchReposAndOrgs() {
     await fetch(`https://api.github.com/users/${username}/repos`)
       .then(res => res.json())
       .then(json => setUserRepos(json))
@@ -39,16 +37,14 @@ function App() {
     setError(false);
     setLoading(true);
 
-    fetchUserData();
-
-    if (!error) {
-      fetchReposAndOrgs()
-        .then(() => {
-          setDisplayInfo(true);
-          setLoading(false);
-        })
-        .catch(err => setError(!!err));
-    }
+    fetchUserData().then(() => {
+      if (!error) {
+        setDisplayInfo(true);
+        setLoading(false);
+      } else {
+        setLoading(false);
+      }
+    });
   };
   return (
     <div className="App">
