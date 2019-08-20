@@ -75,7 +75,6 @@ function App() {
             type="text"
             placeholder="GitHub Username"
             value={username}
-            data-value={username}
             onChange={event => setUsername(event.target.value)}
           />
           <button disabled={loading} type="submit">
